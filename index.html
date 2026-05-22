@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionando Dados</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black: #0a0a0c;
+            --dark-gray: #121218;
+            --white: #ffffff;
+            --green: #00ff66;
+            --gold: #ffd700;
+            --red: #ff3333;
+            --lilac: #9d4edd;
+            --glow-green: rgba(0, 255, 102, 0.4);
+            --glow-lilac: rgba(157, 78, 221, 0.4);
+            --glow-gold: rgba(255, 215, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            background-image: 
+                linear-gradient(rgba(18, 18, 24, 0.85), rgba(10, 10, 12, 0.95)),
+                radial-gradient(circle at 50% 50%, var(--lilac) 0%, transparent 60%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--lilac);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px dashed var(--lilac);
+            padding-bottom: 20px;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px var(--glow-gold), 0 0 20px var(--glow-gold);
+        }
+
+        header p {
+            color: var(--green);
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Painéis e Telas */
+        .panel {
+            background: rgba(18, 18, 24, 0.8);
+            border: 2px solid var(--lilac);
+            box-shadow: 0 0 15px var(--glow-lilac);
+            border-radius: 8px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 20px;
+            width: 50px;
+            height: 2px;
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Menu de Navegação / Abas */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        .btn-nav {
+            background: transparent;
+            border: 2px solid var(--lilac);
+            color: var(--white);
+            padding: 10px 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        }
+
+        .btn-nav.active, .btn-nav:hover {
+            background: var(--lilac);
+            color: var(--black);
+            box-shadow: 0 0 15px var(--glow-lilac);
+        }
+
+        /* Formulário */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        input, textarea {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 10px var(--glow-green);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Botão de Ação Principal */
+        .btn-main {
+            width: 100%;
+            background: transparent;
+            border: 2px solid var(--green);
+            color: var(--green);
+            padding: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0.5;
+            pointer-events: none; /* Desativado por padrão */
+        }
+
+        /* Quando o formulário estiver válido/preenchido completamente */
+        .btn-main.ready {
+            opacity: 1;
+            pointer-events: auto;
+            background: rgba(0, 255, 102, 0.1);
+            text-shadow: 0 0 5px var(--green);
+            box-shadow: 0 0 15px var(--glow-green);
+        }
+
+        .btn-main.ready:hover {
+            background: var(--green);
+            color: var(--black);
+            box-shadow: 0 0 25px var(--green);
+        }
+
+        /* Modo de Edição Ativo */
+        .btn-main.edit-mode {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .btn-main.edit-mode.ready {
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 15px var(--glow-gold);
+        }
+        .btn-main.edit-mode.ready:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 25px var(--gold);
+        }
+
+        /* Lista de Dados (Cards de Jogador/Dados) */
+        .data-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .data-card {
+            background: rgba(10, 10, 12, 0.9);
+            border-left: 4px solid var(--lilac);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-right: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .data-card:hover {
+            border-left-color: var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .card-body {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .card-item span {
+            color: #aaa;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .card-item p {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .card-obs {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 5px;
+            border-left: 2px solid var(--lilac);
+        }
+
+        /* Botões de Ação do Card */
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: flex-end;
+        }
+
+        .btn-action {
+            padding: 6px 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer;
+            background: transparent;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-edit {
+            border: 1px solid var(--lilac);
+            color: var(--lilac);
+        }
+
+        .btn-edit:hover {
+            background: var(--lilac);
+            color: var(--white);
+            box-shadow: 0 0 10px var(--glow-lilac);
+        }
+
+        .btn-delete {
+            border: 1px solid var(--red);
+            color: var(--red);
+        }
+
+        .btn-delete:hover {
+            background: var(--red);
+            color: var(--white);
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
+        }
+
+        /* Status informativo */
+        .status-msg {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Coletando Dados</h1>
+            <p>// Terminal de Armazenamento Web</p>
+        </header>
+
+        <div class="nav-buttons">
+            <!-- <button class="btn-nav active" id="view-form-btn">Inserir Dados</button>
+             <button class="btn-nav" id="view-data-btn">Visualizar Banco</button> -->
+        </div>
+
+        <div id="form-panel" class="panel">
+            <form id="data-form">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" required placeholder="Ex: Arthur Pendragon">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" required placeholder="Ex: name@domain.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="phone">Telefone / Celular</label>
+                        <input type="tel" id="phone" required placeholder="Ex: (11) 99999-9999">
+                    </div>
+                    <div class="input-group">
+                        <label for="birthdate">Data de Nascimento</label>
+                        <input type="date" id="birthdate" required>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="obs">Observações / Informações Extras</label>
+                        <textarea id="obs" required placeholder="Digite notas adicionais criptografadas aqui..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" id="submit-btn" class="btn-main">Iniciar Upload de Dados</button>
+            </form>
+        </div>
+
+        <div id="data-panel" class="panel hidden">
+            <div class="data-list" id="database-records">
+                <div class="status-msg">Sincronizando com a rede do Firebase...</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue, remove, update } 
+        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // CONFIGURAÇÃO DO SEU FIREBASE (Substitua pelos dados do seu projeto)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDSfVDrSTe7XQdnuS2MKZee3F2BX_0oC20",
+            authDomain: "coletando-2b90b.firebaseapp.com",
+            databaseURL: "https://coletando-2b90b-default-rtdb.firebaseio.com",
+            projectId: "coletando-2b90b",
+            storageBucket: "coletando-2b90b.firebasestorage.app",
+            messagingSenderId: "108357189904",
+            appId: "1:108357189904:web:45e92f95c98d9cdc0f6595"
+        };
+
+        // Inicializando o Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const dbRef = ref(db, "operadores");
+
+        // Elementos do DOM
+        const formPanel = document.getElementById('form-panel');
+        const dataPanel = document.getElementById('data-panel');
+        const viewFormBtn = document.getElementById('view-form-btn');
+        const viewDataBtn = document.getElementById('view-data-btn');
+        const dataForm = document.getElementById('data-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const recordsContainer = document.getElementById('database-records');
+
+        // Estado do App (Controla se estamos editando um registro existente)
+        let editMode = false;
+        let currentEditId = null;
+
+        // --- SISTEMA DE NAVEGAÇÃO ENTRE TELAS ---
+        viewFormBtn.addEventListener('click', () => {
+            viewFormBtn.classList.add('active');
+            viewDataBtn.classList.remove('active');
+            formPanel.classList.remove('hidden');
+            dataPanel.classList.add('hidden');
+        });
+
+        viewDataBtn.addEventListener('click', () => {
+            viewDataBtn.classList.add('active');
+            viewFormBtn.classList.remove('active');
+            dataPanel.classList.remove('hidden');
+            formPanel.classList.add('hidden');
+        });
+
+        // --- VALIDAÇÃO EM TEMPO REAL (Habilitar Botão quando tudo estiver preenchido) ---
+        const inputs = dataForm.querySelectorAll('input, textarea');
+        function checkFormValidity() {
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allFilled = false;
+                }
+            });
+            
+            if (allFilled) {
+                submitBtn.classList.add('ready');
+            } else {
+                submitBtn.classList.remove('ready');
+            }
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', checkFormValidity);
+            input.addEventListener('change', checkFormValidity);
+        });
+
+        // --- ENVIAR OU EDITAR DADOS NO FIREBASE ---
+        dataForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                birthdate: document.getElementById('birthdate').value,
+                obs: document.getElementById('obs').value
+            };
+
+            if (editMode && currentEditId) {
+                // Modo Edição: Atualizar registro existente
+                const recordRef = ref(db, `operadores/${currentEditId}`);
+                update(recordRef, formData)
+                    .then(() => {
+                        alert("Registro atualizado na Matrix com sucesso!");
+                        resetFormState();
+                        viewDataBtn.click(); // Vai para a tela de visualização
+                    })
+                    .catch(err => alert("Erro ao atualizar: " + err));
+            } else {
+                // Modo Inserção: Criar novo registro
+                push(dbRef, formData)
+                    .then(() => {
+                        alert("Dados enviados para a Nuvem com sucesso!");
+                        dataForm.reset();
+                        checkFormValidity();
+                    })
+                    .catch(err => alert("Erro ao enviar: " + err));
+            }
+        });
+
+        function resetFormState() {
+            dataForm.reset();
+            editMode = false;
+            currentEditId = null;
+            submitBtn.textContent = "Iniciar Upload de Dados";
+            submitBtn.classList.remove('edit-mode');
+            checkFormValidity();
+        }
+
+        // --- LEITURA EM TEMPO REAL DO BANCO DE DADOS (Realtime Sync) ---
+        onValue(dbRef, (snapshot) => {
+            recordsContainer.innerHTML = "";
+            
+            if (!snapshot.exists()) {
+                recordsContainer.innerHTML = `<div class="status-msg" style="color: var(--red);">Nenhum dado encontrado no Banco de Dados.</div>`;
+                return;
+            }
+
+            snapshot.forEach((childSnapshot) => {
+                const id = childSnapshot.key;
+                const data = childSnapshot.val();
+
+                // Formatando a data de nascimento para padrão BR
+                const dateParts = data.birthdate.split('-');
+                const formattedDate = dateParts.length === 3 ? `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}` : data.birthdate;
+
+                const card = document.createElement('div');
+                card.className = 'data-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-title">${data.name}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-item"><span>E-mail</span><p>${data.email}</p></div>
+                        <div class="card-item"><span>Telefone</span><p>${data.phone}</p></div>
+                        <div class="card-item"><span>Nascimento</span><p>${formattedDate}</p></div>
+                        <div class="card-obs"><span>Observações</span><p>${data.obs}</p></div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-action btn-edit" data-id="${id}">Editar</button>
+                        <button class="btn-action btn-delete" data-id="${id}">Deletar</button>
+                    </div>
+                `;
+
+                recordsContainer.appendChild(card);
+            });
+
+            // Adicionar Eventos dinâmicos nos botões de Editar e Deletar mapeados
+            document.querySelectorAll('.btn-edit').forEach(btn => {
+                btn.addEventListener('click', (e) => loadRecordToEdit(e.target.getAttribute('data-id')));
+            });
+
+            document.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.addEventListener('click', (e) => deleteRecord(e.target.getAttribute('data-id')));
+            });
+        });
+
+        // --- FUNÇÃO PARA DELETAR REGISTRO ---
+        window.deleteRecord = function(id) {
+            if (confirm("Tem certeza que deseja expurgar permanentemente estes dados do sistema?")) {
+                const recordRef = ref(db, `operadores/${id}`);
+                remove(recordRef)
+                    .then(() => alert("Dados eliminados do servidor central."))
+                    .catch(err => alert("Erro ao deletar: " + err));
+            }
+        }
+
+        // --- FUNÇÃO PARA PEGAR DADOS E COLOCAR NO FORMULÁRIO PARA EDITAR ---
+        window.loadRecordToEdit = function(id) {
+            const recordRef = ref(db, `operadores/${id}`);
+            
+            // Buscar dados específicos uma vez
+            onValue(recordRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('email').value = data.email;
+                    document.getElementById('phone').value = data.phone;
+                    document.getElementById('birthdate').value = data.birthdate;
+                    document.getElementById('obs').value = data.obs;
+
+                    // Mudar comportamento do formulário para modo edição
+                    editMode = true;
+                    currentEditId = id;
+                    submitBtn.textContent = "Atualizar Registro Existente";
+                    submitBtn.classList.add('edit-mode');
+                    checkFormValidity();
+
+                    // Mudar tela de volta para o formulário
+                    viewFormBtn.click();
+                }
+            }, { onlyOnce: true });
+        }
+    </script>
+</body>
+</html>
