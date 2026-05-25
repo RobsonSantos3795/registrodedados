@@ -15,7 +15,6 @@
             --white: #ffffff;
             --green: #00ff66;
             --gold: #ffd700;
-            --red: #ff3333;
             --lilac: #9d4edd;
             --glow-green: rgba(0, 255, 102, 0.4);
             --glow-lilac: rgba(157, 78, 221, 0.4);
@@ -41,7 +40,6 @@
             overflow-x: hidden;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -87,7 +85,6 @@
             margin-top: 5px;
         }
 
-        /* Painéis e Telas */
         .panel {
             background: rgba(18, 18, 24, 0.8);
             border: 2px solid var(--lilac);
@@ -110,38 +107,6 @@
             box-shadow: 0 0 10px var(--green);
         }
 
-        .hidden {
-            display: none !important;
-        }
-
-        /* Menu de Navegação / Abas */
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            justify-content: center;
-        }
-
-        .btn-nav {
-            background: transparent;
-            border: 2px solid var(--lilac);
-            color: var(--white);
-            padding: 10px 25px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-        }
-
-        .btn-nav.active, .btn-nav:hover {
-            background: var(--lilac);
-            color: var(--black);
-            box-shadow: 0 0 15px var(--glow-lilac);
-        }
-
-        /* Formulário */
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -188,7 +153,6 @@
             min-height: 80px;
         }
 
-        /* Botão de Ação Principal */
         .btn-main {
             width: 100%;
             background: transparent;
@@ -205,10 +169,9 @@
             position: relative;
             overflow: hidden;
             opacity: 0.5;
-            pointer-events: none; /* Desativado por padrão */
+            pointer-events: none;
         }
 
-        /* Quando o formulário estiver válido/preenchido completamente */
         .btn-main.ready {
             opacity: 1;
             pointer-events: auto;
@@ -222,139 +185,6 @@
             color: var(--black);
             box-shadow: 0 0 25px var(--green);
         }
-
-        /* Modo de Edição Ativo */
-        .btn-main.edit-mode {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-        .btn-main.edit-mode.ready {
-            background: rgba(255, 215, 0, 0.1);
-            box-shadow: 0 0 15px var(--glow-gold);
-        }
-        .btn-main.edit-mode.ready:hover {
-            background: var(--gold);
-            color: var(--black);
-            box-shadow: 0 0 25px var(--gold);
-        }
-
-        /* Lista de Dados (Cards de Jogador/Dados) */
-        .data-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .data-card {
-            background: rgba(10, 10, 12, 0.9);
-            border-left: 4px solid var(--lilac);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-right: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 0 8px 8px 0;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .data-card:hover {
-            border-left-color: var(--gold);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
-            transform: translateX(5px);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
-
-        .card-title {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--gold);
-            font-size: 1.2rem;
-        }
-
-        .card-body {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            font-size: 0.95rem;
-        }
-
-        .card-item span {
-            color: #aaa;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            display: block;
-        }
-
-        .card-item p {
-            color: var(--white);
-            font-weight: 500;
-        }
-
-        .card-obs {
-            grid-column: 1 / -1;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 5px;
-            border-left: 2px solid var(--lilac);
-        }
-
-        /* Botões de Ação do Card */
-        .card-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            justify-content: flex-end;
-        }
-
-        .btn-action {
-            padding: 6px 15px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            cursor: pointer;
-            background: transparent;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-edit {
-            border: 1px solid var(--lilac);
-            color: var(--lilac);
-        }
-
-        .btn-edit:hover {
-            background: var(--lilac);
-            color: var(--white);
-            box-shadow: 0 0 10px var(--glow-lilac);
-        }
-
-        .btn-delete {
-            border: 1px solid var(--red);
-            color: var(--red);
-        }
-
-        .btn-delete:hover {
-            background: var(--red);
-            color: var(--white);
-            box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
-        }
-
-        /* Status informativo */
-        .status-msg {
-            text-align: center;
-            color: #888;
-            font-style: italic;
-            padding: 20px;
-        }
     </style>
 </head>
 <body>
@@ -364,11 +194,6 @@
             <h1>Coletando Dados</h1>
             <p>// Terminal de Armazenamento Web</p>
         </header>
-
-        <div class="nav-buttons">
-            <!-- <button class="btn-nav active" id="view-form-btn">Inserir Dados</button>
-             <button class="btn-nav" id="view-data-btn">Visualizar Banco</button> -->
-        </div>
 
         <div id="form-panel" class="panel">
             <form id="data-form">
@@ -397,20 +222,13 @@
                 <button type="submit" id="submit-btn" class="btn-main">Iniciar Upload de Dados</button>
             </form>
         </div>
-
-        <div id="data-panel" class="panel hidden">
-            <div class="data-list" id="database-records">
-                <div class="status-msg">Sincronizando com a rede do Firebase...</div>
-            </div>
-        </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, onValue, remove, update } 
-        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // CONFIGURAÇÃO DO SEU FIREBASE (Substitua pelos dados do seu projeto)
+        // CONFIGURAÇÃO DO SEU FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyDSfVDrSTe7XQdnuS2MKZee3F2BX_0oC20",
             authDomain: "coletando-2b90b.firebaseapp.com",
@@ -427,35 +245,11 @@
         const dbRef = ref(db, "operadores");
 
         // Elementos do DOM
-        const formPanel = document.getElementById('form-panel');
-        const dataPanel = document.getElementById('data-panel');
-        const viewFormBtn = document.getElementById('view-form-btn');
-        const viewDataBtn = document.getElementById('view-data-btn');
         const dataForm = document.getElementById('data-form');
         const submitBtn = document.getElementById('submit-btn');
-        const recordsContainer = document.getElementById('database-records');
-
-        // Estado do App (Controla se estamos editando um registro existente)
-        let editMode = false;
-        let currentEditId = null;
-
-        // --- SISTEMA DE NAVEGAÇÃO ENTRE TELAS ---
-        viewFormBtn.addEventListener('click', () => {
-            viewFormBtn.classList.add('active');
-            viewDataBtn.classList.remove('active');
-            formPanel.classList.remove('hidden');
-            dataPanel.classList.add('hidden');
-        });
-
-        viewDataBtn.addEventListener('click', () => {
-            viewDataBtn.classList.add('active');
-            viewFormBtn.classList.remove('active');
-            dataPanel.classList.remove('hidden');
-            formPanel.classList.add('hidden');
-        });
-
-        // --- VALIDAÇÃO EM TEMPO REAL (Habilitar Botão quando tudo estiver preenchido) ---
         const inputs = dataForm.querySelectorAll('input, textarea');
+
+        // VALIDAÇÃO EM TEMPO REAL (Habilitar Botão quando tudo estiver preenchido)
         function checkFormValidity() {
             let allFilled = true;
             inputs.forEach(input => {
@@ -476,7 +270,7 @@
             input.addEventListener('change', checkFormValidity);
         });
 
-        // --- ENVIAR OU EDITAR DADOS NO FIREBASE ---
+        // ENVIAR DADOS PARA O FIREBASE
         dataForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -488,121 +282,15 @@
                 obs: document.getElementById('obs').value
             };
 
-            if (editMode && currentEditId) {
-                // Modo Edição: Atualizar registro existente
-                const recordRef = ref(db, `operadores/${currentEditId}`);
-                update(recordRef, formData)
-                    .then(() => {
-                        alert("Registro atualizado na Matrix com sucesso!");
-                        resetFormState();
-                        viewDataBtn.click(); // Vai para a tela de visualização
-                    })
-                    .catch(err => alert("Erro ao atualizar: " + err));
-            } else {
-                // Modo Inserção: Criar novo registro
-                push(dbRef, formData)
-                    .then(() => {
-                        alert("Dados enviados para a Nuvem com sucesso!");
-                        dataForm.reset();
-                        checkFormValidity();
-                    })
-                    .catch(err => alert("Erro ao enviar: " + err));
-            }
-        });
-
-        function resetFormState() {
-            dataForm.reset();
-            editMode = false;
-            currentEditId = null;
-            submitBtn.textContent = "Iniciar Upload de Dados";
-            submitBtn.classList.remove('edit-mode');
-            checkFormValidity();
-        }
-
-        // --- LEITURA EM TEMPO REAL DO BANCO DE DADOS (Realtime Sync) ---
-        onValue(dbRef, (snapshot) => {
-            recordsContainer.innerHTML = "";
-            
-            if (!snapshot.exists()) {
-                recordsContainer.innerHTML = `<div class="status-msg" style="color: var(--red);">Nenhum dado encontrado no Banco de Dados.</div>`;
-                return;
-            }
-
-            snapshot.forEach((childSnapshot) => {
-                const id = childSnapshot.key;
-                const data = childSnapshot.val();
-
-                // Formatando a data de nascimento para padrão BR
-                const dateParts = data.birthdate.split('-');
-                const formattedDate = dateParts.length === 3 ? `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}` : data.birthdate;
-
-                const card = document.createElement('div');
-                card.className = 'data-card';
-                card.innerHTML = `
-                    <div class="card-header">
-                        <div class="card-title">${data.name}</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-item"><span>E-mail</span><p>${data.email}</p></div>
-                        <div class="card-item"><span>Telefone</span><p>${data.phone}</p></div>
-                        <div class="card-item"><span>Nascimento</span><p>${formattedDate}</p></div>
-                        <div class="card-obs"><span>Observações</span><p>${data.obs}</p></div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn-action btn-edit" data-id="${id}">Editar</button>
-                        <button class="btn-action btn-delete" data-id="${id}">Deletar</button>
-                    </div>
-                `;
-
-                recordsContainer.appendChild(card);
-            });
-
-            // Adicionar Eventos dinâmicos nos botões de Editar e Deletar mapeados
-            document.querySelectorAll('.btn-edit').forEach(btn => {
-                btn.addEventListener('click', (e) => loadRecordToEdit(e.target.getAttribute('data-id')));
-            });
-
-            document.querySelectorAll('.btn-delete').forEach(btn => {
-                btn.addEventListener('click', (e) => deleteRecord(e.target.getAttribute('data-id')));
-            });
-        });
-
-        // --- FUNÇÃO PARA DELETAR REGISTRO ---
-        window.deleteRecord = function(id) {
-            if (confirm("Tem certeza que deseja expurgar permanentemente estes dados do sistema?")) {
-                const recordRef = ref(db, `operadores/${id}`);
-                remove(recordRef)
-                    .then(() => alert("Dados eliminados do servidor central."))
-                    .catch(err => alert("Erro ao deletar: " + err));
-            }
-        }
-
-        // --- FUNÇÃO PARA PEGAR DADOS E COLOCAR NO FORMULÁRIO PARA EDITAR ---
-        window.loadRecordToEdit = function(id) {
-            const recordRef = ref(db, `operadores/${id}`);
-            
-            // Buscar dados específicos uma vez
-            onValue(recordRef, (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('email').value = data.email;
-                    document.getElementById('phone').value = data.phone;
-                    document.getElementById('birthdate').value = data.birthdate;
-                    document.getElementById('obs').value = data.obs;
-
-                    // Mudar comportamento do formulário para modo edição
-                    editMode = true;
-                    currentEditId = id;
-                    submitBtn.textContent = "Atualizar Registro Existente";
-                    submitBtn.classList.add('edit-mode');
+            // Criar novo registro
+            push(dbRef, formData)
+                .then(() => {
+                    alert("Dados enviados para a Nuvem com sucesso!");
+                    dataForm.reset();
                     checkFormValidity();
-
-                    // Mudar tela de volta para o formulário
-                    viewFormBtn.click();
-                }
-            }, { onlyOnce: true });
-        }
+                })
+                .catch(err => alert("Erro ao enviar: " + err));
+        });
     </script>
 </body>
 </html>
